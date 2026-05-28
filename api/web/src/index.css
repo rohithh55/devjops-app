@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 0 0% 0%;
+    
+    --primary: 200 100% 50%;
+    --primary-foreground: 0 0% 0%;
+    
+    --primary-dark: 200 100% 40%;
+    --primary-accent: 200 100% 45%;
+    --primary-light: 200 100% 60%;
+    
+    --secondary: 0 0% 90%;
+    --secondary-foreground: 0 0% 0%;
+    
+    --accent: 200 100% 50%;
+    --accent-foreground: 0 0% 0%;
+    
+    --muted: 0 0% 90%;
+    --muted-foreground: 0 0% 20%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+    
+    --border: 200 100% 50%;
+    --input: 200 100% 50%;
+    --ring: 200 100% 50%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 0%;
+    
+    --radius: 0rem;
+  }
+
+  .dark {
+    --background: 0 0% 98%;
+    --foreground: 0 0% 0%;
+    
+    --primary: 200 100% 50%;
+    --primary-foreground: 0 0% 0%;
+    
+    --primary-dark: 200 100% 40%;
+    --primary-accent: 200 100% 45%;
+    --primary-light: 200 100% 60%;
+    
+    --secondary: 0 0% 90%;
+    --secondary-foreground: 0 0% 0%;
+    
+    --accent: 200 100% 50%;
+    --accent-foreground: 0 0% 0%;
+    
+    --muted: 0 0% 90%;
+    --muted-foreground: 0 0% 20%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+    
+    --border: 200 100% 50%;
+    --input: 200 100% 50%;
+    --ring: 200 100% 50%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 0%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Outfit", sans-serif;
+    overflow-x: clip;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+    @apply font-extrabold tracking-tight text-black;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .border-thick {
+    border-width: 4px;
+  }
+  .border-medium {
+    border-width: 2px;
+  }
+}
