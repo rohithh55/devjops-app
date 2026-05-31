@@ -1,110 +1,68 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800;900&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
-    --foreground: 0 0% 0%;
-    
-    --primary: 200 100% 50%;
-    --primary-foreground: 0 0% 0%;
-    
-    --primary-dark: 200 100% 40%;
-    --primary-accent: 200 100% 45%;
-    --primary-light: 200 100% 60%;
-    
-    --secondary: 0 0% 90%;
-    --secondary-foreground: 0 0% 0%;
-    
-    --accent: 200 100% 50%;
-    --accent-foreground: 0 0% 0%;
-    
+    /* Ocean blue background + white text */
+    --background: 200 100% 40%;        /* ocean blue */
+    --foreground: 0 0% 100%;           /* white text */
+
+    /* Primary accents */
+    --primary: 200 100% 50%;           /* lighter ocean */
+    --primary-foreground: 0 0% 100%;   /* white */
+    --primary-dark: 200 100% 30%;
+    --primary-light: 200 100% 70%;
+
+    /* Secondary (cards/sections) */
+    --secondary: 0 0% 100%;            /* white cards */
+    --secondary-foreground: 0 0% 0%;   /* black text */
+
+    /* Accent colors */
+    --accent: 200 100% 60%;            /* accent blue */
+    --accent-foreground: 0 0% 100%;    /* white */
+
+    /* Muted text */
     --muted: 0 0% 90%;
     --muted-foreground: 0 0% 20%;
-    
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
-    
+
+    /* Card defaults */
+    --card: 0 0% 100%;                 /* white */
+    --card-foreground: 0 0% 0%;        /* black */
+
+    /* Popovers */
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 0%;
-    
+
+    /* Borders/inputs/rings */
     --border: 200 100% 50%;
     --input: 200 100% 50%;
     --ring: 200 100% 50%;
-    
+
+    /* Destructive (errors) */
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 0%;
-    
-    --radius: 0rem;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Radius */
+    --radius: 0.5rem;
   }
 
   .dark {
-    --background: 0 0% 98%;
-    --foreground: 0 0% 0%;
-    
-    --primary: 200 100% 50%;
-    --primary-foreground: 0 0% 0%;
-    
-    --primary-dark: 200 100% 40%;
-    --primary-accent: 200 100% 45%;
-    --primary-light: 200 100% 60%;
-    
-    --secondary: 0 0% 90%;
-    --secondary-foreground: 0 0% 0%;
-    
-    --accent: 200 100% 50%;
-    --accent-foreground: 0 0% 0%;
-    
-    --muted: 0 0% 90%;
-    --muted-foreground: 0 0% 20%;
-    
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
-    
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
-    
-    --border: 200 100% 50%;
-    --input: 200 100% 50%;
-    --ring: 200 100% 50%;
-    
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 0%;
-  }
-}
+    --background: 200 100% 20%;        /* darker ocean */
+    --foreground: 0 0% 100%;           /* white text */
 
-@layer base {
-  * {
-    @apply border-border;
+    --card: 0 0% 15%;                  /* dark cards */
+    --card-foreground: 0 0% 100%;      /* white text */
+
+    --secondary: 0 0% 20%;
+    --secondary-foreground: 0 0% 100%;
+
+    --accent: 200 100% 40%;
+    --accent-foreground: 0 0% 100%;
   }
-  
+
   body {
-    @apply bg-background text-foreground;
-    font-family: "Outfit", sans-serif;
-    overflow-x: clip;
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    text-wrap: balance;
-    @apply font-extrabold tracking-tight text-black;
-  }
-  
-  html {
-    scroll-behavior: smooth;
+    @apply bg-[hsl(var(--background))] text-[hsl(var(--foreground))] font-sans;
   }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-  .border-thick {
-    border-width: 4px;
-  }
-  .border-medium {
-    border-width: 2px;
-  }
-}

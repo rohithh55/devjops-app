@@ -2,6 +2,9 @@
   "name": "monorepo",
   "version": "0.0.0",
   "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
     "dev": "concurrently --kill-others --raw \"npm run dev --prefix apps/web\" \"npm run dev --prefix apps/api\" \"npm run dev --prefix apps/pocketbase\"",
     "build": "concurrently --raw \"npm run build --prefix apps/web\"",
@@ -10,8 +13,6 @@
   },
   "devDependencies": {
     "concurrently": "^9.1.2"
-  },
-  "workspaces": [
-    "apps/*"
-  ]
+  }
 }
+
