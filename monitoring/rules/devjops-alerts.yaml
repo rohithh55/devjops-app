@@ -1,0 +1,38 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+
+metadata:
+  name: devjops-alerts
+  namespace: monitoring
+  labels:
+    release: monitoring
+
+spec:
+  groups:
+  - name: devjops
+
+    rules:
+
+    - alert: BackendDown
+      expr: up{job="devjops-backend"} == 0
+      for: 1m
+      labels:
+        severity: critical
+      annotations:
+        summary: Backend service is down
+
+    - alert: HighTraffic
+      expr: sum(rate(devjops_http_requests_total[1m])) > 5
+      for: 1m
+      labels:
+        severity: warning
+      annotations:
+        summary: High traffic detected
+
+    - alert: PodRestart
+      expr: increase(kube_pod_container_status_restarts_total{namespace="devjops"}[5m]) > 0
+      for: 1m
+      labels:
+        severity: critical
+      annotations:
+        summary: Pod restarted in devjops namespace

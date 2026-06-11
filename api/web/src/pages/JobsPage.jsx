@@ -1,21 +1,47 @@
 import React, { useEffect, useState } from "react";
+import pb from "../lib/pocketbase";
 
 export default function JobsPage() {
   const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/jobs")
-      .then((res) => res.json())
-      .then((data) => setJobs(data))
-      .catch((err) => console.error("Error loading jobs:", err));
-  }, []);
+  fetch("/api/jobs")
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("JOBS RECEIVED:", data);
+      alert(JSON.stringify(data));
+      setJobs(data);
+    })
+    .catch((err) => {
+      console.error(err);
+      alert(err);
+    })
+    .finally(() => setLoading(false));
+   }, []);
+  if (loading) {
+    return (
+      <div
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          fontSize: "32px",
+          fontWeight: "bold",
+        }}
+      >
+        Loading Jobs...
+      </div>
+    );
+  }
 
   return (
     <div
       style={{
         minHeight: "100vh",
         background: "#0077b6",
-        padding: "50px 20px",
+        padding: "40px",
         color: "white",
       }}
     >
@@ -24,7 +50,7 @@ export default function JobsPage() {
           textAlign: "center",
           fontSize: "60px",
           fontWeight: "bold",
-          marginBottom: "50px",
+          marginBottom: "40px",
         }}
       >
         Available Jobs
@@ -36,101 +62,109 @@ export default function JobsPage() {
           margin: "0 auto",
         }}
       >
-        {jobs.map((job) => (
+        {jobs.length === 0 ? (
           <div
-            key={job.id}
             style={{
-              background: "rgba(255,255,255,0.15)",
-              borderRadius: "25px",
-              padding: "30px",
-              marginBottom: "25px",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
+              textAlign: "center",
+              fontSize: "28px",
             }}
           >
-            {/* LEFT SIDE */}
-            <div style={{ width: "75%" }}>
-              <h2
-                style={{
-                  fontSize: "38px",
-                  fontWeight: "bold",
-                  marginBottom: "12px",
-                }}
-              >
-                {job.title}
-              </h2>
+            No jobs available
+          </div>
+        ) : (
+          jobs.map((job) => (
+            <div
+              key={job.id}
+              style={{
+                background: "rgba(255,255,255,0.15)",
+                borderRadius: "25px",
+                padding: "30px",
+                marginBottom: "25px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <div style={{ width: "75%" }}>
+                <h2
+                  style={{
+                    fontSize: "36px",
+                    fontWeight: "bold",
+                    marginBottom: "10px",
+                  }}
+                >
+                  {job.title}
+                </h2>
+
+                <div
+                  style={{
+                    fontSize: "22px",
+                    marginBottom: "15px",
+                  }}
+                >
+                  🏢 {job.company} | 📍 {job.location}
+                </div>
+
+                <details>
+                  <summary
+                    style={{
+                      cursor: "pointer",
+                      fontSize: "18px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Description : View More
+                  </summary>
+
+                  <div
+                    style={{
+                      marginTop: "15px",
+                      fontSize: "17px",
+                      lineHeight: "1.7",
+                    }}
+                  >
+                    {job.description}
+                  </div>
+                </details>
+              </div>
 
               <div
                 style={{
-                  fontSize: "22px",
-                  marginBottom: "15px",
+                  width: "25%",
+                  textAlign: "center",
                 }}
               >
-                🏢 {job.company || "Company"} | 📍 {job.location}
+                <a
+                  href={job.field}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    color: "white",
+                    textDecoration: "none",
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: "80px",
+                    }}
+                  >
+                    🚀
+                  </div>
+
+                  <div
+                    style={{
+                      fontSize: "24px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    APPLY NOW
+                  </div>
+                </a>
               </div>
-
-              <details>
-                <summary
-                  style={{
-                    cursor: "pointer",
-                    fontSize: "18px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Description : View More
-                </summary>
-
-                <p
-                  style={{
-                    marginTop: "12px",
-                    fontSize: "17px",
-                    lineHeight: "1.6",
-                  }}
-                >
-                  {job.description}
-                </p>
-              </details>
             </div>
-
-            {/* RIGHT SIDE */}
-            <div
-              style={{
-                width: "25%",
-                textAlign: "center",
-              }}
-            >
-              <a
-                href={job.field}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  textDecoration: "none",
-                  color: "white",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: "80px",
-                  }}
-                >
-                  🚀
-                </div>
-
-                <div
-                  style={{
-                    fontSize: "24px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  APPLY NOW
-                </div>
-              </a>
-            </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );
 }
-

@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: backend-service
+  namespace: devjops
+
+spec:
+  selector:
+    app: backend
+
+  ports:
+    - name: http
+      protocol: TCP
+      port: 4000
+      targetPort: 4000
+
+  type: ClusterIP
